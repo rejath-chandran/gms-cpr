@@ -1,0 +1,37 @@
+/* Rounded Rectangle Input Box Style */
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+.rounded-input {
+    width: 30vw;  /* Full width */
+    padding: 12px 20px;  /* Space inside the input box */
+    font-size: 16px;  /* Font size */
+    border: 2px solid #0093b8;  /* Blue border */
+    border-radius: 12px;  /* Rounded corners */
+    background-color: #333;  /* Dark background */
+    color: white;  /* White text */
+    outline: none;  /* Remove default outline */
+    transition: border-color 0.3s ease, background-color 0.3s ease;  /* Smooth transition */
+  }
+  
+  /* Focus State for Rounded Input */
+  .rounded-input:focus {
+    border-color: #00ccff;  /* Darker blue border when focused */
+    background-color: #444;  /* Slightly lighter background on focus */
+  }
+
+  /* Style text in blue color with Roboto font */
+.blue-text {
+    font-family: "Poiret One", sans-serif;
+    font-weight: 600;
+    font-style: bold;
+    color: #0099ff; /* Blue text color */
+    font-size: 46px; /* Font size */
+  }
+
+.blue-text2 {
+    font-family: "Poiret One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #00ccff; /* Blue text color */
+    font-size: 36px; /* Font size */
+  }
+  
