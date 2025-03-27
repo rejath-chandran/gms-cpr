@@ -1,7 +1,10 @@
 /* Rounded Rectangle Input Box Style */
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 .rounded-input {
-    width: 30vw;  /* Full width */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: bold;
+    width: 15vw;  /* Full width */
+    height: 0.3vw;
     padding: 12px 20px;  /* Space inside the input box */
     font-size: 16px;  /* Font size */
     border: 2px solid #0093b8;  /* Blue border */
@@ -11,12 +14,30 @@
     outline: none;  /* Remove default outline */
     transition: border-color 0.3s ease, background-color 0.3s ease;  /* Smooth transition */
   }
-  
-  /* Focus State for Rounded Input */
+    /* Focus State for Rounded Input */
   .rounded-input:focus {
     border-color: #00ccff;  /* Darker blue border when focused */
     background-color: #444;  /* Slightly lighter background on focus */
   }
+  .sele {
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: bold;
+    width: 15vw;  /* Full width */
+    height: 2.2vw;
+    font-size: 16px;  /* Font size */
+    border: 2px solid #0093b8;  /* Blue border */
+    border-radius: 12px;  /* Rounded corners */
+    background-color: #333;  /* Dark background */
+    color: white;  /* White text */
+    transition: border-color 0.3s ease, background-color 0.3s ease;  /* Smooth transition */
+  }
+    /* Focus State for Rounded Input */
+    .sele:focus {
+      border-color: #00ccff;  /* Darker blue border when focused */
+      background-color: #444;  /* Slightly lighter background on focus */
+    }
+
 
   /* Style text in blue color with Roboto font */
 .blue-text {
@@ -24,7 +45,7 @@
     font-weight: 600;
     font-style: bold;
     color: #0099ff; /* Blue text color */
-    font-size: 46px; /* Font size */
+    font-size: 35px; /* Font size */
   }
 
 .blue-text2 {
@@ -32,6 +53,33 @@
     font-weight: 400;
     font-style: normal;
     color: #00ccff; /* Blue text color */
-    font-size: 36px; /* Font size */
+    font-size: 25px; /* Font size */
+  }
+  .subbutton {
+    position: absolute;
+    left: 5vw;
+    top: 80vh;
+    text-align: center;
+    font-family: "Poiret One", sans-serif;
+    font-weight: 600;
+    font-style: bold;
+    color: #0099ff;
+    width: 20vw;  /* Full width */
+    height: 3.6vw;
+    padding: 12px 20px;  /* Space inside the input box */
+    font-size: 20px;  /* Font size */
+    border: 2px solid #0099ff;  /* Blue border */
+    border-radius: 25px;  /* Rounded corners */
+    background-color: #000000;  /* Dark background */
+    outline: none;  /* Remove default outline */
+    transition: border-color 0.3s ease, width 0.3s ease, color 0.3s ease, height 0.3s ease;  /* Smooth transition */
+  }
+  
+  /* Focus State for Rounded Input */
+  .subbutton:hover {
+    /* width: 16vw;  Full width */
+    /* height: 3.3vw; */
+    border-color: #00ccff;  /* Darker blue border when focused */
+    color: #00ccff;
   }
   

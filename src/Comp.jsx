@@ -31,7 +31,7 @@ function Comp() {
   let modcontents = contents[String(course)]
   modcontents=String(modcontents).split("||")
   let enddate=new Date(String(String(startdate).slice(0,4)+"-"+String(parseInt(String(startdate).slice(5,7))+parseInt(duration))+"-"+String(startdate).slice(8,10)))
-  // const chk=String(weekdays).includes(String(enddate).slice(0,4));
+
   if (String(weekdays).indexOf(String(String(enddate).slice(0,3)))==-1){
     let c=1;
     if ((String(weekdays)=="Mon Wed Fri")){
@@ -47,7 +47,6 @@ function Comp() {
       enddate.setDate(enddate.getDate() + c);
     }}
 
-  // let st1=["Topic/Subject: "+subject, "Topic Start Date: "+startdate, "Student's Name: "+name, "Mobile Number"+mobno, "Fuculty"+faculty, "Topic End Date"+enddate]
   const savefile=()=>{
     const fnlenddate=String(enddate).slice(4,15)
     // Create new pdf Document
@@ -89,23 +88,21 @@ function Comp() {
         }
         strdate.setDate(strdate.getDate() + c);
       }}
-    let inmdata = [["Proposed Date of Completion: "+String(strdate).slice(4,15),"Actual Date of Completion:"],
-      ["Course Lag Days:         ","Reason:"],
-      ["Signature of Academic Manager: ",""]];
       // ,["",""],["",""]
     for (let i = 0; i < modcontents.length; i++){ // Iterating through individual tables
-      if(isNaN(Number(String(modcontents[i].slice(-2,modcontents[i].length))))){
-        strdate=enddate
+      if(isNaN(modcontents[i].slice(-2,modcontents[i].length))){
+        strdate=enddate // change to string containing spaces 
+                        // (20): "                     " :<---- copy if proposed date to be left blank
       }else{
-        strdate.setDate(strdate.getDate()+Number(String(modcontents[i].slice(-2,modcontents[i].length))));
+        strdate.setDate(strdate.getDate()+Number(modcontents[i].slice(-2,modcontents[i].length)));
       }
       ///////////////////////////////////////////////////
       if(modcontents[i]=="{end}"){ // End Table
         let cursorYPosition = doc.autoTable.previous.finalY +20;
         doc.autoTable({
-          body: [["Student Sign:","                          ","Faculty Sign:","                          "],
-          ["Proposed Date of Subject Completion:","                          ","Actual Date of Subject Completion:","                          "],
-          ["Total Course Lag Days:","                          ","Signature of Academic Manager","                          "],],
+          body: [["Student Sign:","                               ","Faculty Sign:","                               "],
+          ["Proposed Date of Subject Completion:",String(enddate).slice(4,15),"Actual Date of Subject Completion:","                          "],
+          ["Total Course Lag Days:","                               ","Signature of Academic Manager","                               "],],
           // startY: 50,
           margin: {top: 30,left: 20,bottom:0},
           startY: cursorYPosition,
@@ -176,7 +173,9 @@ function Comp() {
         doc.autoTable({
             // console.log(String(modcontents[i]).slice(-1,-3))
             startY: cursorYPosition + 5,
-            body: inmdata,
+            body: [["Proposed Date of Completion: "+String(strdate).slice(4,15),"Actual Date of Completion:"],
+            ["Course Lag Days:         ","Reason:"],
+            ["Signature of Academic Manager: ",""]],
             // footer: [['',''],['','']],
             // ,["",""],["",""]
             theme: "plain",
@@ -197,46 +196,50 @@ function Comp() {
   // pattern="\d{2}-\d{2}-\d{4}" )&&(pass=="pt8c5e9j1oKr2P7e4tQiwV"[0,10,2].reverse()
   return (
     <div style={{height: "100vh", width:"100vw"}}>
-    <div style={{position:"absolute", top: "10vh", left:"10vw", width:'60vw'}}>
-      
-      <p class="blue-text">
-          <br />New Student Details<br />
-      </p>
+      <div style={{position:"absolute", top: "0.1vh", left:"5vw", width:'45vw'}}>
+        <p class="blue-text">
+            <br />New Student Details<br />
+        </p>
+      </div>
+    <div style={{position:"absolute", top: "24vh", left:"5vw", width:'45vw'}}>
       <p class="blue-text2">
         Subject: &nbsp;
         <input class="rounded-input" type="text" placeholder="Subject" onChange={(e)=>Setsubject(e.target.value)}/>
       </p>
-      <p>
+      <p class="blue-text2">
         Date of Joining: &nbsp;
         <input class="rounded-input" type="date" placeholder="Date Of Joining" onChange={(e)=>Setstartdate(e.target.value)}/>
       </p>
-      <p>
-        Week Days: &nbsp;  
+      <p class="blue-text2">
+        Week Days: &nbsp; &nbsp; 
         <input type="radio" id="Mon Wed Fri" name="weekdays" value="Mon Wed Fri" onClick={(e)=>Setweekdays("Mon Wed Fri")}/>
-        <label for="Mon Wed Fri">
-          MWF &nbsp;
+        <label for="Mon Wed Fri" style={{fontSize:"20px"}}>
+          MWF &nbsp; &nbsp;
         </label>
         <input type="radio" id="Tue Thu Sat" name="weekdays" value="Tue Thu Sat" onClick={(e)=>Setweekdays("Tue Thu Sat")}/>
-        <label for="Tue Thu Sat">
+        <label for="Tue Thu Sat" style={{fontSize:"20px"}}>
           TTS &nbsp;
         </label>
       </p>
-      <p>
+      <p class="blue-text2">
         Duration of Course in Months: &nbsp;
         <input class="rounded-input" type="text" placeholder="Duration" onChange={(e)=>Setduration(e.target.value)}/>
       </p>
-      <p>
+      <p class="blue-text2">
         Name of the Student: &nbsp;
         <input class="rounded-input" type="text" placeholder="Name" onChange={(e)=>Setname(e.target.value)}/>
       </p>
-      <p>
+      </div>
+      <div style={{position:"absolute", top: "24vh", left:"60vw", width:'40vw'}}>
+      <p class="blue-text2">
         Mobile Number: &nbsp;
-        <input type="text" placeholder="Mobile Number" onChange={(e)=>Setmobno(e.target.value)}/>
+        <input class="rounded-input" type="text" placeholder="Mobile Number" onChange={(e)=>Setmobno(e.target.value)}/>
       </p>
-      <p>
+      <p class="blue-text2">
         Course: &nbsp;
-        <select defaultValue="Select Course" name="course" id="course" placeholder="Course" onChange={(e)=>Setcourse(e.target.value)}>
+        <select class="sele" defaultValue="Select Course" name="course" id="course" placeholder="Course" onChange={(e)=>Setcourse(e.target.value)}>
           <option value={null}>
+            {/* style={{backgroundColor:"#333", width:"15vw", height:"4.5vh", fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif", fontStyle: "bold", color:"white", border: "2px solid #0093b8", borderRadius: "12px", textAlign:"center"}} */}
             Select Course
           </option>
             {(() => {
@@ -249,26 +252,26 @@ function Comp() {
             })()}
         </select>
       </p>
-      <p>
-        Faculty: &nbsp;
+      <p class="blue-text2">
+        Faculty: &nbsp; &nbsp;
         <input type="radio" id="Joel Scaria" name="faculty" value="Joel Scaria" onClick={(e)=>Setfaculty("Joel Scaria")}/>
-        <label for="Joel Scaria">
-          Joel Scaria &nbsp;
+        <label for="Joel Scaria" style={{fontSize:"20px"}}>
+          Joel Scaria &nbsp; &nbsp;
         </label>
         <input type="radio" id="Rejath Chandran" name="faculty" value="Rejath Chandran" onClick={(e)=>Setfaculty("Rejath Chandran")}/>
-        <label for="Rejath Chandran">
+        <label for="Rejath Chandran" style={{fontSize:"20px"}}>
           Rejath Chandran &nbsp;
         </label>
       </p>
-      <p>
+      <p class="blue-text2">
        Register Number: &nbsp;
-       <input type="text" placeholder="Register Number" onChange={(e)=>Setregno(e.target.value)}/><br />
-      </p>
-      <p>
-        <br /><input type="button" onClick={savefile} value={"SUBMIT"}/>
+       <input class="rounded-input" type="text" placeholder="Register Number" onChange={(e)=>Setregno(e.target.value)}/><br />
       </p>
       {/* <p>{name}{phno}{t}</p> */}
     </div>
+    <p>
+      <br /><input class="subbutton" type="button" onClick={savefile} value={"SUBMIT"}/>
+    </p>
     </div>
   )
 }
